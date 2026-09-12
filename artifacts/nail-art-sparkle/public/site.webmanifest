@@ -1,0 +1,17 @@
+{
+  "name": "Nail Art Sparkle",
+  "short_name": "Nail Art Sparkle",
+  "description": "Premium nail art salon in Koramangala, Bangalore",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8F9",
+  "theme_color": "#B3184F",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
