@@ -422,7 +422,7 @@ function Home() {
     time: '',
     service: services[0].name,
   });
-  const location = useLocation();
+  const [pathname] = useLocation();
   const revealObserver = useRef<IntersectionObserver | null>(null);
 
   const filteredServices = useMemo(() => {
@@ -474,7 +474,7 @@ function Home() {
 
   useEffect(() => {
     setMenuOpen(false);
-  }, [location]);
+  }, [pathname]);
 
   useEffect(() => {
     if (menuOpen) {
@@ -606,7 +606,7 @@ function Home() {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 sm:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <a
               href={`tel:${CALL_NUMBER}`}
               className="flex items-center gap-1.5 rounded-full border border-[#B3184F]/30 bg-[#F6E7EE] px-2.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wide text-[#8C1140] shadow-xs active:scale-95"
@@ -618,9 +618,10 @@ function Home() {
             </a>
             <button
               type="button"
-              className="rounded-full border border-[#B3184F]/20 p-2.5 text-[#8C1140]"
+              className="relative z-[70] rounded-full border border-[#B3184F]/20 p-2.5 text-[#8C1140]"
               aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={menuOpen}
+              aria-controls="mobile-nav-drawer"
               onClick={() => setMenuOpen((open) => !open)}
               data-testid="button-mobile-menu"
             >
@@ -634,12 +635,15 @@ function Home() {
       {menuOpen && (
         <>
           <div
-            className="fixed inset-0 z-50 bg-[#2A1420]/60 backdrop-blur-sm sm:hidden animate-in fade-in duration-200"
+            className="fixed inset-0 z-[60] bg-[#2A1420]/60 backdrop-blur-sm lg:hidden"
             onClick={() => setMenuOpen(false)}
             aria-hidden="true"
           />
           <aside
-            className="fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-[350px] flex-col justify-between overflow-y-auto bg-[#FFF8FA] p-6 shadow-[0_20px_50px_rgba(42,20,32,0.4)] sm:hidden animate-in slide-in-from-right duration-300"
+            id="mobile-nav-drawer"
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-y-0 right-0 z-[65] flex w-[min(88vw,350px)] flex-col justify-between overflow-y-auto bg-[#FFF8FA] p-6 shadow-[0_20px_50px_rgba(42,20,32,0.4)] lg:hidden"
             aria-label="Mobile navigation drawer"
           >
             <div>
